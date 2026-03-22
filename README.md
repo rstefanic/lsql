@@ -4,6 +4,38 @@ Small test to see how ergonomic it would be to query a directory using SQL.
 
 The name comes from combining `ls` and `sql`.
 
+## Examples
+
+Query a directory
+
+```shell
+# Query the current directory
+lsql "SELECT * FROM ."
+
+# Query the temp directory
+lsql "SELECT * FROM /tmp"
+```
+
+Just return the name of the files in the current directory if you're in this repo.
+
+```
+lsql "SELECT name, mode FROM ."
+
+| name        | mode      |
+|-------------|-----------|
+| main.odin   | rw-r--r-- |
+| lexer.odin  | rw-r--r-- |
+| .envrc      | rw-r--r-- |
+| flake.lock  | rw-r--r-- |
+| lsql        | rwxr-xr-x |
+| README.md   | rw-r--r-- |
+| parser.odin | rw-r--r-- |
+| .gitignore  | rw-r--r-- |
+| flake.nix   | rw-r--r-- |
+| .git        | rwxr-xr-x |
+| .direnv     | rwxr-xr-x |
+```
+
 ## Usage
 
 ```
@@ -24,35 +56,3 @@ Flags:
 - creation_time
 - modification_time
 - access_time
-
-## Examples
-
-Query a directory
-
-```shell
-# Query the current directory
-lsql "SELECT * FROM ."
-
-# Query the temp directory
-lsql "SELECT * FROM /tmp"
-```
-
-Just return the name of the files in the current directory if you're in this repo.
-
-```
-lsql "SELECT name FROM ."
-
-| name        |
-|-------------|
-| main.odin   |
-| lexer.odin  |
-| .envrc      |
-| flake.lock  |
-| lsql        |
-| README.md   |
-| parser.odin |
-| .gitignore  |
-| flake.nix   |
-| .git        |
-| .direnv     |
-```
